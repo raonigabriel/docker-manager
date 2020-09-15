@@ -44,8 +44,8 @@ public class ContainerController {
 		}
 	}
 
-	@GetMapping
-	public ResponseEntity<Container> getById(@PathVariable String containerId) {
+	@GetMapping(path = "/{id}")
+	public ResponseEntity<Container> getById(@PathVariable(name = "id") String containerId) {
 		List<String> filter = Collections.singletonList(containerId);
 		try (ListContainersCmd cmd = dockerClient.listContainersCmd().withIdFilter(filter)) {
 			List<Container> results = cmd.exec();
@@ -61,8 +61,8 @@ public class ContainerController {
 	}
 
 
-	@DeleteMapping
-	public ResponseEntity<Void> deleteContainerById(@PathVariable String containerId) {
+	@DeleteMapping(path = "/{id}")
+	public ResponseEntity<Void> deleteContainerById(@PathVariable(name = "id") String containerId) {
 		try (RemoveContainerCmd cmd = dockerClient.removeContainerCmd(containerId)) {
 			cmd.exec();
 		} catch (Exception ex) {
