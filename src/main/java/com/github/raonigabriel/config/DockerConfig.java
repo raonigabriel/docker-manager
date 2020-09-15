@@ -16,7 +16,8 @@ public class DockerConfig {
 	@Bean
 	public DockerClientConfig dockerClientConfig() {
 		return DefaultDockerClientConfig.createDefaultConfigBuilder()
-			    .withDockerHost("tcp://localhost:2735")
+			    .withDockerHost("unix:///var/run/docker.sock")
+//			    .withDockerHost("tcp://localhost:2735")
 			    .withDockerTlsVerify(false).build();
 	}
 	
